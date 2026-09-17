@@ -46,3 +46,32 @@ a nivel de la librería `rclpy` en ROS. Se intentó recompliar el workspace, per
 
 ## Video de evidencia
 [https://drive.google.com/file/d/1trtEGrdVqCTSipwbotfSvsvO4Ny0M0_S/view?usp=sharing](https://drive.google.com/file/d/1VV_9rB2liUBDP6wEKo30pgkuDaUI1PI9/view?usp=sharing)
+
+## Ejemplo LED  ROS2 y ESP32
+
+### Descripción
+Este ejemplo controla un LED físico conectado a una ESP32 desde ROS2,
+usando comunicación serial como puente entre ambos.
+
+### Cómo funciona
+- `led_blink.py`: nodo que publica en el tópico `/led_command` (tipo
+  `std_msgs/msg/Int32`) alternando entre 1 y 0 cada segundo mediante un timer.
+- `serial_bridge.py`: nodo suscrito al mismo tópico `/led_command`; al recibir
+  un mensaje, lo traduce y lo envía por puerto serie (`/dev/ttyUSB0` a 115200
+  baudios) a la ESP32 como el carácter '1' o '0'.
+- `LED_Serial.ino`: firmware de la ESP32 que lee el puerto serie y enciende
+  o apaga el LED en el pin GPIO2 según el carácter recibido.
+
+### Comandos utilizados
+ros2 run basics serial_bridge
+ros2 run basics led_blink
+ros2 topic list
+ros2 topic info /led_command
+ros2 topic echo /led_command
+ros2 node list
+ros2 node info /led_blink
+ros2 node info /serial_bridge
+rqt_graph
+
+### Video de evidencia — LED
+
