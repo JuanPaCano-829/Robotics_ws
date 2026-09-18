@@ -75,3 +75,34 @@ rqt_graph
 
 ### Video de evidencia — LED
 
+
+## Ejemplo Potenciómetro ROS2 y ESP32
+
+### Descripción
+Este ejemplo lee el valor analógico de un potenciómetro conectado a una
+ESP32 y lo transmite a ROS2 mediante comunicación serial, para ser
+desplegado en tiempo real por un nodo suscriptor.
+
+### Cómo funciona
+- `ADC_Pot.ino`: firmware de la ESP32 que lee continuamente el valor
+  analógico del potenciómetro conectado al pin GPIO15 (rango de 0 a 4095,
+  ya que la ESP32 tiene un ADC de 12 bits) y lo envía por puerto serie
+  cada 100ms.
+- `analog_serial_pub.py`: nodo que abre la conexión serial con la ESP32
+  (`/dev/ttyUSB0` a 115200 baudios), lee las líneas que llegan, y publica
+  cada valor como un mensaje `std_msgs/msg/Int32` en el tópico `/analog`.
+- `analog_subs.py`: nodo suscrito al tópico `/analog` que recibe cada
+  valor y lo muestra en consola.
+
+### Comandos utilizados
+ros2 run basics analog_serial_pub
+ros2 run basics analog_subs
+ros2 topic list
+ros2 topic info /analog
+ros2 topic echo /analog
+ros2 node list
+ros2 node info /analog_serial_pub
+ros2 node info /analog_subscriber
+rqt_graph
+
+### Video de evidencia — Potenciómetro
