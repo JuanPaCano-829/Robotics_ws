@@ -47,6 +47,56 @@ a nivel de la librería `rclpy` en ROS. Se intentó recompliar el workspace, per
 ## Video de evidencia
 [https://drive.google.com/file/d/1trtEGrdVqCTSipwbotfSvsvO4Ny0M0_S/view?usp=sharing](https://drive.google.com/file/d/1VV_9rB2liUBDP6wEKo30pgkuDaUI1PI9/view?usp=sharing)
 
+
+## Actividad: Control de velocidad de la tortuga (turtlesim)
+
+### Descripción
+Esta actividad consiste en copiar y modificar los nodos originales
+`velocity_publisher.py` y `velocity_subscriber.py` para controlar la
+velocidad de traslación de la tortuga de `turtlesim`, en lugar de solo
+publicar un valor numérico simple.
+
+### Explicación de las modificaciones realizadas
+Se copiaron ambos scripts originales y se renombraron a
+`velocity_turtle_pub.py` y `velocity_turtle_subs.py`. Los cambios
+principales fueron:
+- Se cambió el tipo de mensaje de `Float32` a `Twist` (de
+  `geometry_msgs.msg`), ya que es el tipo que espera turtlesim para
+  moverse.
+- Se cambió el tópico de `/velocity` a `/turtle1/cmd_vel`, que es el
+  tópico que escucha la tortuga.
+- Se modificó el incremento de velocidad para ir de 0.0 a 1.2 en pasos
+  de 0.1 cada 0.5 segundos (en vez de hasta 1.5 cada 1 segundo).
+- Se agregó lógica para que, al llegar a 1.2, se publique una velocidad
+  de 0.0 (deteniendo la tortuga) y se cancele el timer para dejar de
+  publicar.
+- En el suscriptor, se cambió la lectura de `msg.data` a `msg.linear.x`,
+  ya que la velocidad translacional en un mensaje `Twist` vive en ese
+  campo.
+
+### Cómo funcionan el publicador y el suscriptor
+- `velocity_turtle_pub.py`: publica mensajes tipo
+  `geometry_msgs/msg/Twist` en el tópico `/turtle1/cmd_vel`, aumentando
+  la velocidad lineal en x de 0.0 a 1.2 en incrementos de 0.1 cada 0.5
+  segundos, y deteniéndose (velocidad 0.0) al llegar al límite.
+- `velocity_turtle_subs.py`: se suscribe al mismo tópico
+  `/turtle1/cmd_vel` y muestra en consola el valor de velocidad lineal
+  recibido en cada mensaje.
+
+### Comandos utilizados
+ros2 run turtlesim turtlesim_node
+ros2 run basics velocity_turtle_pub
+ros2 run basics velocity_turtle_subs
+ros2 topic list
+ros2 topic info /turtle1/cmd_vel
+ros2 topic echo /turtle1/cmd_vel
+ros2 node list
+ros2 node info /velocity_turtle_pub
+rqt_graph
+
+### Video de evidencia — Tortuga
+
+
 ## Ejemplo LED  ROS2 y ESP32
 
 ### Descripción
@@ -74,7 +124,7 @@ ros2 node info /serial_bridge
 rqt_graph
 
 ### Video de evidencia — LED
-
+https://drive.google.com/drive/folders/1CeuX6O58BN4kHyB9tPxrcADjBu716P_R?usp=drive_link
 
 ## Ejemplo Potenciómetro ROS2 y ESP32
 
@@ -106,3 +156,4 @@ ros2 node info /analog_subscriber
 rqt_graph
 
 ### Video de evidencia — Potenciómetro
+https://drive.google.com/drive/folders/1CeuX6O58BN4kHyB9tPxrcADjBu716P_R?usp=drive_link
