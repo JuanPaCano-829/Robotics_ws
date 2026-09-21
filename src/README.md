@@ -159,7 +159,7 @@ rqt_graph
 https://drive.google.com/drive/folders/1CeuX6O58BN4kHyB9tPxrcADjBu716P_R?usp=drive_link
 
 
-## Actividad: Control de Turtlesim con joystick vía ESP32
+## Control de Turtlesim con joystick
 
 ### Descripción
 Esta actividad integra lectura de hardware analógico (joystick de 2 ejes)
@@ -247,3 +247,4 @@ orden limpio (turtlesim → joystick_publisher → turtle_controller),
 tras lo cual el sistema funcionó correctamente y de forma estable.
 
 ### Video de evidencia
+https://drive.google.com/drive/folders/1LNKTqBuN21xCuWFdfjxwWlqM8dyhF5L5?usp=drive_link
