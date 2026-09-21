@@ -32,6 +32,8 @@ setup(
             'serial_bridge = basics.serial_bridge:main',
             'analog_serial_pub = basics.analog_serial_pub:main',
             'analog_subs = basics.analog_subs:main',
+	    'joystick_publisher = basics.joystick_publisher:main',
+            'turtle_controller = basics.turtle_controller:main',
         ],
     },
 )
