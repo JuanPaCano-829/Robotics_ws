@@ -248,3 +248,26 @@ tras lo cual el sistema funcionó correctamente y de forma estable.
 
 ### Video de evidencia
 https://drive.google.com/drive/folders/1LNKTqBuN21xCuWFdfjxwWlqM8dyhF5L5?usp=drive_link
+
+
+
+
+## Launch File velocity_system.launch.py
+
+### Descripción
+Esta actividad implementa un archivo launch de ROS2 que permite arrancar
+simultáneamente los nodos `velocity_publisher` y `velocity_subscriber`
+desde una sola terminal, en vez de requerir una terminal separada para
+cada nodo como se hacía anteriormente. El archivo `velocity_system.launch.py`
+se ubica en `src/basics/launch/` y se registra en `setup.py` a través de
+la sección `data_files`, lo que permite ejecutarlo con:
+
+### Comandos utilizados
+ros2 launch basics velocity_system.launch.py
+ros2 node list
+ros2 topic list
+ros2 topic echo /velocity
+rqt_graph
+
+### Video de evidencia
+
