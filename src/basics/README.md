@@ -271,3 +271,46 @@ rqt_graph
 
 ### Video de evidencia
 https://drive.google.com/drive/folders/1x89lJrtU6HjUOip_EoncMPY42EvDuVWO?usp=drive_link
+
+
+# Paquete basics
+
+## Descripción general
+Este paquete de ROS2 contiene los nodos desarrollados a lo largo del
+seminario: publicadores y suscriptores de velocidad simple, control de
+la tortuga de Turtlesim, control de un LED y lectura de un potenciómetro
+vía ESP32, control de Turtlesim mediante un joystick físico, y los
+launch files que permiten ejecutar grupos de estos nodos con un solo
+comando.
+
+## Estructura del paquete
+- `basics/` — nodos de Python (publicadores, suscriptores, controladores).
+- `esp32_basics/` — firmware de Arduino para la ESP32 (LED, potenciómetro,
+  joystick) y scripts de prueba serial.
+- `launch/` — archivos launch para ejecutar varios nodos con un solo comando.
+
+
+## Launch integrado (turtle_joy_controller.launch.py)
+
+### Descripción
+Esta actividad integra el trabajo de las dos actividades anteriores:
+el control de Turtlesim mediante joystick y el uso de launch files.
+Se generó `turtle_joy_controller.launch.py`, que arranca con un solo
+comando los tres nodos necesarios para el sistema completo:
+`turtlesim_node`, `joystick_publisher` y `turtle_controller`. Además,
+se reestructuró el paquete `basics` para que contenga, de forma
+unificada, tanto el código Python como el firmware de la ESP32
+(`esp32_basics/`) y los launch files (`launch/`), eliminando la
+carpeta separada `colmibot_firmware`.
+
+### Comandos utilizados
+ros2 launch basics turtle_joy_controller.launch.py
+ros2 node list
+ros2 topic list
+ros2 topic echo /joystick_raw
+ros2 topic echo /turtle1/cmd_vel
+rqt_graph
+
+### Video de evidencia
+https://drive.google.com/drive/folders/1O1Vmd1lQw7UqqHmXOKkkKwPPbS9HwPpn?usp=sharing
+
